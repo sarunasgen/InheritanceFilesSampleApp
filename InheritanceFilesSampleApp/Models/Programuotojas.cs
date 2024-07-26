@@ -31,5 +31,14 @@ namespace InheritanceFilesSampleApp.Models
         {
             ProgramavimoKalbos.Add(kalba);
         }
+        public string KalbosCSV()
+        {
+            string kalbos = string.Empty;
+            foreach(string k in ProgramavimoKalbos)
+            {
+                kalbos += $"{k};";
+            }
+            return kalbos;
+        }
     }
 }

@@ -17,6 +17,13 @@ namespace InheritanceFilesSampleApp.Models
             GimimoData = gimimoData;
             
         }
+        public ProjektuVadovas(List<string> projektai, string vardas, string pavarde, DateOnly gimimoData) : base()
+        {
+            AtliktiProjektai = projektai;
+            Vardas = vardas;
+            Pavarde = pavarde;
+            GimimoData = gimimoData;
+        }
         public override string ToString()
         {
             string projektai = "";
@@ -29,6 +36,15 @@ namespace InheritanceFilesSampleApp.Models
         public void AtliktiDarVienaProjekta(string projektas)
         {
             AtliktiProjektai.Add(projektas);
+        }
+        public string ProjektaiCSV()
+        {
+            string projektai = string.Empty;
+            foreach (string p in AtliktiProjektai)
+            {
+                projektai += $"{p};";
+            }
+            return projektai;
         }
     }
 }

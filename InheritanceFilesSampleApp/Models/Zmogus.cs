@@ -9,7 +9,7 @@ namespace InheritanceFilesSampleApp.Models
     public class Zmogus
     {
         public string Vardas { get; set; }
-        protected string Pavarde { get; set; }
+        public string Pavarde { get; set; }
         public DateOnly GimimoData { get; set; }
     }
 }
