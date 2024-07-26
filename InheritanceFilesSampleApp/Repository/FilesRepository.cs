@@ -1,4 +1,5 @@
-﻿using InheritanceFilesSampleApp.Models;
+﻿using InheritanceFilesSampleApp.Contracts;
+using InheritanceFilesSampleApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace InheritanceFilesSampleApp.Repository
 {
-    public class FilesRepository
+    public class FilesRepository : IFilesRepository
     {
         private readonly string ProgramuotojuFailoVieta;
         private readonly string ProjektuVadovuFailoVieta;
+        private int ProgramuotojuFailoEilutes = 0;
+
         public FilesRepository(string duomenuFailasProg, string duomenuFailasProjVad)
         {
             ProgramuotojuFailoVieta = duomenuFailasProg;
@@ -29,6 +32,7 @@ namespace InheritanceFilesSampleApp.Repository
                     string[] pKalbos = vertes[4].Split(';');
                     List<string> programavimoKalbos = pKalbos.ToList();
                     darbuotojai.Add(new Programuotojas(programavimoKalbos, vertes[3], vertes[0], vertes[1], DateOnly.Parse(vertes[2])));
+                    ProgramuotojuFailoEilutes++;
                 }
             }
 
@@ -58,6 +62,7 @@ namespace InheritanceFilesSampleApp.Repository
             {
                 sw.WriteLine($"{p.Vardas},{p.Pavarde},{p.GimimoData},{p.Seniority},{p.KalbosCSV()}");
             }
+            ProgramuotojuFailoEilutes++;
         }
         public void PridetiProjektuVadovas(ProjektuVadovas p)
         {
@@ -65,6 +70,11 @@ namespace InheritanceFilesSampleApp.Repository
             {
                 sw.WriteLine($"{p.Vardas},{p.Pavarde},{p.GimimoData},{p.ProjektaiCSV()}");
             }
+        }
+
+        public bool ArProgramuotojuFailasNetuscias()
+        {
+            return ProgramuotojuFailoEilutes > 0 ? true : false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using InheritanceFilesSampleApp.Models;
+﻿using InheritanceFilesSampleApp.Contracts;
+using InheritanceFilesSampleApp.Models;
 using InheritanceFilesSampleApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace InheritanceFilesSampleApp.Service
     {
         private List<Darbuotojas> Darbuotojai { get; set; } = new List<Darbuotojas>();
 
-        private readonly FilesRepository _filesRepository;
-        public KompanijaService(FilesRepository filesRepository)
+        private readonly IFilesRepository _filesRepository;
+        public KompanijaService(IFilesRepository filesRepository)
         {
             _filesRepository = filesRepository;
             OnStart();
@@ -65,6 +66,10 @@ namespace InheritanceFilesSampleApp.Service
                 _filesRepository.PridetiProgramuotoja((Programuotojas)darbuotojas);
             else
                 _filesRepository.PridetiProjektuVadovas((ProjektuVadovas)darbuotojas);
+        }
+        public bool ArProgramuotojuFaileYraDuomenu()
+        {
+            return _filesRepository.ArProgramuotojuFailasNetuscias();
         }
         
     }

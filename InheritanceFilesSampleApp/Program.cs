@@ -1,4 +1,5 @@
-﻿using InheritanceFilesSampleApp.Models;
+﻿using InheritanceFilesSampleApp.Contracts;
+using InheritanceFilesSampleApp.Models;
 using InheritanceFilesSampleApp.Repository;
 using InheritanceFilesSampleApp.Service;
 
@@ -8,7 +9,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        FilesRepository filesRepository = new FilesRepository("Programuotojai.csv", "ProjektuVadovai.csv");
+        IFilesRepository filesRepository = new FilesRepository("Programuotojai.csv", "ProjektuVadovai.csv");
         KompanijaService kompanijaService = new KompanijaService(filesRepository);
 
         while (true)
@@ -18,7 +19,8 @@ public class Program
             Console.WriteLine("3. Rodyti visus projektu vadovus");
             Console.WriteLine("4. Prideti projektu vadova");
             Console.WriteLine("5. Prideti programuotoja");
-            Console.WriteLine("6. Baigti Darba");
+            Console.WriteLine("6. Ar Programuotoju faile yra duomenu");
+            Console.WriteLine("20. Baigti Darba");
 
             string pasirinkimas = Console.ReadLine();
             switch (pasirinkimas)
@@ -78,6 +80,9 @@ public class Program
                     kompanijaService.PridetiDarbuotoja(new Programuotojas(kalbos, pseniority, pvardas, ppavarde, DateOnly.Parse(pgimimoData)));
                     break;
                 case "6":
+                    Console.WriteLine($"Programuotoju failas netuscias: {kompanijaService.ArProgramuotojuFaileYraDuomenu()}");
+                    break;
+                case "20":
                     Environment.Exit(0);
                     break;
             }
