@@ -10,7 +10,7 @@ public class Program
     public static void Main(string[] args)
     {
         IFilesRepository filesRepository = new FilesRepository("Programuotojai.csv", "ProjektuVadovai.csv");
-        KompanijaService kompanijaService = new KompanijaService(filesRepository);
+        IKompanijaService kompanijaService = new KompanijaService(filesRepository);
 
         while (true)
         {

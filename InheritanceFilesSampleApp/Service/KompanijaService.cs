@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InheritanceFilesSampleApp.Service
 {
-    public class KompanijaService
+    public class KompanijaService : IKompanijaService
     {
         private List<Darbuotojas> Darbuotojai { get; set; } = new List<Darbuotojas>();
 
